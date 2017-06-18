@@ -1,45 +1,27 @@
-﻿<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org6f86cea">1. Overview</a>
-<ul>
-<li><a href="#orgc823fce">What is FlowAnalyzer?</a></li>
-<li><a href="#orge78f9b2">Why to use Optical Flow Analysis?</a></li>
-<li><a href="#org91b0e32">How does Optical Flow Analysis work?</a></li>
-<li><a href="#org737bc00">Regions of interest and disinterest</a></li>
-<li><a href="#org7454bd0">Computing Motion Signals</a></li>
-</ul>
-</li>
-<li><a href="#orgc1fbbb6">2. Installation</a>
-<ul>
-<li><a href="#org0d9c2e3">Standalone application (Mac OS only)</a></li>
-<li><a href="#org1eda3db">General method (Linux, Mac, Windows)</a>
-<ul>
-<li><a href="#orga7035dc">Download FlowAnalyzer</a></li>
-<li><a href="#orgf2eae96">Install Python</a></li>
-<li><a href="#org3db9129">Install the required Python libraries</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgebaa8c2">3. Quick Start Guide</a>
-<ul>
-<li><a href="#org50ab5b9">Running FlowAnalyzer</a></li>
-</ul>
-</li>
-<li><a href="#orge21def6">4. Auxiliary tools</a></li>
-</ul>
-</div>
-</div>
+﻿- [Overview](#orgf385e4f)
+  - [What is FlowAnalyzer?](#orgd2247f4)
+  - [Why to use Optical Flow Analysis?](#orgce51103)
+  - [How does Optical Flow Analysis work?](#org49c0400)
+  - [Regions of interest and disinterest](#org626ab34)
+  - [Computing Motion Signals](#orgadbb251)
+- [Installation](#orgdfac75c)
+  - [Standalone application (Mac OS only)](#orgc361fec)
+  - [General method (Linux, Mac, Windows)](#org178fb11)
+    - [Download FlowAnalyzer](#orgf26645b)
+    - [Install Python](#org05d8a7b)
+    - [Install the required Python libraries](#org161c4e7)
+- [Quick Start Guide](#org273865e)
+  - [Running FlowAnalyzer](#org9004743)
+- [Auxiliary tools](#org4e158c4)
 
 
-<a id="org6f86cea"></a>
+
+<a id="orgf385e4f"></a>
 
 # Overview
 
 
-<a id="orgc823fce"></a>
+<a id="orgd2247f4"></a>
 
 ## What is FlowAnalyzer?
 
@@ -52,7 +34,7 @@
 ![img](./media/metronome/metronome_320x240_30fps_h264_frames_8050_16100_zoom.png)
 
 
-<a id="orge78f9b2"></a>
+<a id="orgce51103"></a>
 
 ## Why to use Optical Flow Analysis?
 
@@ -63,7 +45,7 @@
 -   Objective
 
 
-<a id="org91b0e32"></a>
+<a id="org49c0400"></a>
 
 ## How does Optical Flow Analysis work?
 
@@ -81,7 +63,7 @@
     -   alternatively, we can discard the vectors' directions and visualize their amplitudes as brightness. We call this a flow video, as shown [here](./media/videos/KatieTest_whole_flow-11_small.mov)
 
 
-<a id="org737bc00"></a>
+<a id="org626ab34"></a>
 
 ## Regions of interest and disinterest
 
@@ -96,7 +78,7 @@
 ![img](./media/pictures/baby_regions.png)
 
 
-<a id="org7454bd0"></a>
+<a id="orgadbb251"></a>
 
 ## Computing Motion Signals
 
@@ -107,38 +89,38 @@
 ![img](./media/pictures/100002010000041800000122C009BAB3A4FAD015.png)
 
 
-<a id="orgc1fbbb6"></a>
+<a id="orgdfac75c"></a>
 
 # Installation
 
 
-<a id="org0d9c2e3"></a>
+<a id="orgc361fec"></a>
 
 ## Standalone application (Mac OS only)
 
 There is a DMG installation file for Mac OSX available [here](./builds/MacOS/FlowAnalyzer.dmg). Note, however, that this only installs the FlowAnalyzer GUI. Auxiliary scripts (such as for batch processing, creating flow movies, etc) won't be installed in this case.
 
 
-<a id="org1eda3db"></a>
+<a id="org178fb11"></a>
 
 ## General method (Linux, Mac, Windows)
 
 
-<a id="orga7035dc"></a>
+<a id="orgf26645b"></a>
 
 ### Download FlowAnalyzer
 
 First, download the FlowAnalyzer software from [here](./optical_flow.zip).
 
 
-<a id="orgf2eae96"></a>
+<a id="org05d8a7b"></a>
 
 ### Install Python
 
 FlowAnalyzer is written in Python. In order to run it, you need to have Python 2.7 and all the required libraries installed on your computer. The easiest way to achieve this (at least on Windows and Mac OSX) is by using [miniconda](http://conda.pydata.org/miniconda.html). Installation files and instructions can be found [here](http://conda.pydata.org/miniconda.html) and [here](http://conda.pydata.org/docs/install/quick.html), respectively. **Important:** make sure you install miniconda for Python 2.7, not Python 3.x.
 
 
-<a id="org3db9129"></a>
+<a id="org161c4e7"></a>
 
 ### Install the required Python libraries
 
@@ -146,27 +128,37 @@ Now, you need to install the required Python libraries. In order to do that, iss
 
 Mac OSX:
 
-    conda upgrade --all
-    conda install matplotlib=1.3.1 pytables=3.0.0 pillow=2.7.0 pyqt=5.6.0 opencv=2.4.8 xlrd=1.0.0 xlwt=1.1.2
+```shell
+conda upgrade --all
+conda install matplotlib=1.3.1 pytables=3.0.0 pillow=2.7.0 pyqt=5.6.0 opencv=2.4.8 xlrd=1.0.0 xlwt=1.1.2
+```
 
 Windows:
 
-    conda upgrade --all
-    conda install matplotlib=1.5.3 pytables=3.3.0 pillow=3.4.2 pyqt=5.6.0 xlrd=1.0.0 xlwt=1.1.2
+```shell
+conda upgrade --all
+conda install matplotlib=1.5.3 pytables=3.3.0 pillow=3.4.2 pyqt=5.6.0 xlrd=1.0.0 xlwt=1.1.2
+```
 
 On Windows, the OpenCV packages available from miniconda can't handle videos, what makes them useless for our purposes. However, the OpenCV packages available from [Christoph Gohlke's page](http://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv) work fine. Go to his page and download version 2.4.x (not 3.x) of the OpenCV package for your architecture (32 or 64 bits). As a convenience, these packages are also available from [here](./opencv/opencv_python-2.4.13.2-cp27-cp27m-win32.whl) (32 bits) and [here](./opencv/opencv_python-2.4.13.2-cp27-cp27m-win_amd64.whl) (64 bits). After downloading the appropriate file, install it using the pip command:
 
-    pip install file_name
+```shell
+pip install file_name
+```
 
-where file\_name is the name of the downloaded file (with a .whl extension). 
+where file\_name is the name of the downloaded file (with a .whl extension).
 
 If you use Linux, you probably don't need miniconda, as the required libraries are likely available through your distribution's package manager (although you can still use miniconda if you want). For example, in Debian/Ubuntu the required libraries can be installed with the following command:
 
-    sudo apt-get install python-matplotlib python-tables python-imaging python-xlrd python-xlwt python-pyqt5 python-opencv
+```shell
+sudo apt-get install python-matplotlib python-tables python-imaging python-xlrd python-xlwt python-pyqt5 python-opencv
+```
 
 Finally, you need the py-notify module, which only seems to be available through [pip](http://pypi.python.org). In order to install py-notify through pip, issue the following command in a terminal window:
 
-    pip install py-notify
+```shell
+pip install py-notify
+```
 
 If the command above fails (for example, because you don't have a C compiler installed &#x2013; something quite common on Windows and Mac OSX), you can use the pre-compiled binaries below:
 
@@ -177,18 +169,20 @@ If the command above fails (for example, because you don't have a C compiler ins
 Download the appropriate file for your architecture and uncompress it in the same folder where the FlowAnalyzer.py script is located, or put it somewhere in your Python path.
 
 
-<a id="orgebaa8c2"></a>
+<a id="org273865e"></a>
 
 # Quick Start Guide
 
 
-<a id="org50ab5b9"></a>
+<a id="org9004743"></a>
 
 ## Running FlowAnalyzer
 
 Unzip the optical\_flow.zip archive downloaded in the previous section, enter the created folder (optical\_flow/python) and, from there, open a terminal window and do:
 
-    python FlowAnalyzer.py
+```shell
+python FlowAnalyzer.py
+```
 
 This will bring up the interface shown in Figure 1.
 
@@ -219,7 +213,7 @@ The HDF motion file can be loaded into Matlab by using the scripts available in 
 ![img](./figures/figure_5.png "Motion signals computed from optical flow.")
 
 
-<a id="orge21def6"></a>
+<a id="org4e158c4"></a>
 
 # Auxiliary tools
 
@@ -234,4 +228,3 @@ The FlowAnalyzer software defines an API and provides a set of tools for perform
 -   `read_flow_signals.py` - this script imports a motion signals file into Python
 
 -   `read_flow_signals.m` - this script imports a motion signals file into Matlab
-
