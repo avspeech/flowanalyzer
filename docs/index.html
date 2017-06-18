@@ -1,1 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-01-07 Sat 11:57 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FlowAnalyzer</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Adriano Vilela Barbosa" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">FlowAnalyzer</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orga275011">1. Overview</a>
+<ul>
+<li><a href="#org05d7af5">What is FlowAnalyzer?</a></li>
+<li><a href="#org0256af6">Why to use Optical Flow Analysis?</a></li>
+<li><a href="#org97ab950">How does Optical Flow Analysis work?</a></li>
+<li><a href="#org433e64b">Regions of interest and disinterest</a></li>
+<li><a href="#orgcb10c8c">Computing Motion Signals</a></li>
+</ul>
+</li>
+<li><a href="#org3f70516">2. Installation</a>
+<ul>
+<li><a href="#org2c91702">Standalone application (Mac OS only)</a></li>
+<li><a href="#orgfacc904">General method (Linux, Mac, Windows)</a>
+<ul>
+<li><a href="#org5d92d9a">Download FlowAnalyzer</a></li>
+<li><a href="#org63abf37">Install Python</a></li>
+<li><a href="#org14534f1">Install the required Python libraries</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgaea5e0d">3. Quick Start Guide</a>
+<ul>
+<li><a href="#orgb904f72">Running FlowAnalyzer</a></li>
+</ul>
+</li>
+<li><a href="#orge01af9a">4. Auxiliary tools</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga275011" class="outline-2">
+<h2 id="orga275011"><span class="section-number-2">1</span> Overview</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-org05d7af5" class="outline-3">
+<h3 id="org05d7af5">What is FlowAnalyzer?</h3>
+<div class="outline-text-3" id="text-org05d7af5">
+<ul class="org-ul">
+<li>FlowAnalyzer is a piece of software, based on Optical Flow Analysis (OFA), for extracting motion from 2D video sequences</li>
+
+<li>Optical Flow Analysis (OFA) is a quantitative method for measuring motion from video. It is based on a computer vision algorithm known as Optical Flow</li>
+
+<li>As an example, consider <a href="./media/metronome/metronome_320x240_30fps_h264.mov">this video</a> of a metronome. When submitted to Optical Flow Analysis, it produces the following motion signal:</li>
+</ul>
+
+
+
+<div class="figure">
+<p><img src="./media/metronome/metronome_320x240_30fps_h264_frames_8050_16100_zoom.png" alt="metronome_320x240_30fps_h264_frames_8050_16100_zoom.png" title="Action!" align="center" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0256af6" class="outline-3">
+<h3 id="org0256af6">Why to use Optical Flow Analysis?</h3>
+<div class="outline-text-3" id="text-org0256af6">
+<ul class="org-ul">
+<li>Non-invasive (measurement does not interfere with the speech production process)</li>
+<li>Portable (data acquisition can take place out of the lab)</li>
+<li>Automated</li>
+<li>Fast</li>
+<li>Objective</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org97ab950" class="outline-3">
+<h3 id="org97ab950">How does Optical Flow Analysis work?</h3>
+<div class="outline-text-3" id="text-org97ab950">
+<ul class="org-ul">
+<li>Optical flow computes pixel displacements between consecutive frames in the video</li>
+
+<li>All pixel displacements are represented and stored as velocity vectors
+
+<ul class="org-ul">
+<li>x and y components (cartesian coordinates)</li>
+<li>magnitude and direction (polar coordinates)</li>
+</ul></li>
+
+<li>The array of velocity vectors comprises the optical flow field</li>
+
+<li>Flow fields can be visualized in at least two different ways:
+
+<ul class="org-ul">
+<li>we can overlay the velocity vectors directly on the input video, as shown in this <a href="./media/videos/benoit-7_h264.mov">example</a></li>
+
+<li>alternatively, we can discard the vectors' directions and visualize their amplitudes as brightness. We call this a flow video, as shown <a href="./media/videos/KatieTest_whole_flow-11_small.mov">here</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org433e64b" class="outline-3">
+<h3 id="org433e64b">Regions of interest and disinterest</h3>
+<div class="outline-text-3" id="text-org433e64b">
+<ul class="org-ul">
+<li>Rectangular regions of interest (ROIs) and disinterest (RODs) can be defined</li>
+
+<li>All velocity vectors within each region of interest are combined into a single measure</li>
+
+<li>Motion within regions of disinterest is ignored</li>
+
+<li>By combining regions of interest and disinterest, it’s possible to create non-rectangular regions of interest, as shown below</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="./media/pictures/baby_regions.png" alt="baby_regions.png" width="60% Action!" align="center" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgcb10c8c" class="outline-3">
+<h3 id="orgcb10c8c">Computing Motion Signals</h3>
+<div class="outline-text-3" id="text-orgcb10c8c">
+<ul class="org-ul">
+<li>All velocity vectors inside each region of interest are summed for each frame in the video</li>
+
+<li>This creates horizontal, vertical and magnitude motion signals as a function of time</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="./media/pictures/100002010000041800000122C009BAB3A4FAD015.png" alt="100002010000041800000122C009BAB3A4FAD015.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org3f70516" class="outline-2">
+<h2 id="org3f70516"><span class="section-number-2">2</span> Installation</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-org2c91702" class="outline-3">
+<h3 id="org2c91702">Standalone application (Mac OS only)</h3>
+<div class="outline-text-3" id="text-org2c91702">
+<p>
+There is a DMG installation file for Mac OSX available <a href="./builds/MacOS/FlowAnalyzer.dmg">here</a>. Note, however, that this only installs the FlowAnalyzer GUI. Auxiliary scripts (such as for batch processing, creating flow movies, etc) won't be installed in this case.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgfacc904" class="outline-3">
+<h3 id="orgfacc904">General method (Linux, Mac, Windows)</h3>
+<div class="outline-text-3" id="text-orgfacc904">
+</div><div id="outline-container-org5d92d9a" class="outline-4">
+<h4 id="org5d92d9a">Download FlowAnalyzer</h4>
+<div class="outline-text-4" id="text-org5d92d9a">
+<p>
+First, download the FlowAnalyzer software from <a href="./optical_flow.zip">here</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org63abf37" class="outline-4">
+<h4 id="org63abf37">Install Python</h4>
+<div class="outline-text-4" id="text-org63abf37">
+<p>
+FlowAnalyzer is written in Python. In order to run it, you need to have Python 2.7 and all the required libraries installed on your computer. The easiest way to achieve this (at least on Windows and Mac OSX) is by using <a href="http://conda.pydata.org/miniconda.html">miniconda</a>. Installation files and instructions can be found <a href="http://conda.pydata.org/miniconda.html">here</a> and <a href="http://conda.pydata.org/docs/install/quick.html">here</a>, respectively. <b>Important:</b> make sure you install miniconda for Python 2.7, not Python 3.x.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org14534f1" class="outline-4">
+<h4 id="org14534f1">Install the required Python libraries</h4>
+<div class="outline-text-4" id="text-org14534f1">
+<p>
+Now, you need to install the required Python libraries. In order to do that, issue the commands below in a terminal window.
+</p>
+
+<p>
+Mac OSX:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">conda upgrade --all
+conda install <span style="color: #fcaf3e;">matplotlib</span>=1.3.1 <span style="color: #fcaf3e;">pytables</span>=3.0.0 <span style="color: #fcaf3e;">pillow</span>=2.7.0 <span style="color: #fcaf3e;">pyqt</span>=5.6.0 <span style="color: #fcaf3e;">opencv</span>=2.4.8 <span style="color: #fcaf3e;">xlrd</span>=1.0.0 <span style="color: #fcaf3e;">xlwt</span>=1.1.2
+</pre>
+</div>
+
+<p>
+Windows:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">conda upgrade --all
+conda install <span style="color: #fcaf3e;">matplotlib</span>=1.5.3 <span style="color: #fcaf3e;">pytables</span>=3.3.0 <span style="color: #fcaf3e;">pillow</span>=3.4.2 <span style="color: #fcaf3e;">pyqt</span>=5.6.0 <span style="color: #fcaf3e;">xlrd</span>=1.0.0 <span style="color: #fcaf3e;">xlwt</span>=1.1.2
+</pre>
+</div>
+
+
+<p>
+On Windows, the OpenCV packages available from miniconda can't handle videos, what makes them useless for our purposes. However, the OpenCV packages available from <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv">Christoph Gohlke's page</a> work fine. Go to his page and download version 2.4.x (not 3.x) of the OpenCV package for your architecture (32 or 64 bits). As a convenience, these packages are also available from <a href="./opencv/opencv_python-2.4.13.2-cp27-cp27m-win32.whl">here</a> (32 bits) and <a href="./opencv/opencv_python-2.4.13.2-cp27-cp27m-win_amd64.whl">here</a> (64 bits). After downloading the appropriate file, install it using the pip command:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">pip install file_name
+</pre>
+</div>
+
+<p>
+where file_name is the name of the downloaded file (with a .whl extension). 
+</p>
+
+
+<p>
+If you use Linux, you probably don't need miniconda, as the required libraries are likely available through your distribution's package manager (although you can still use miniconda if you want). For example, in Debian/Ubuntu the required libraries can be installed with the following command:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">sudo apt-get install python-matplotlib python-tables python-imaging python-xlrd python-xlwt python-pyqt5 python-opencv
+</pre>
+</div>
+
+<p>
+Finally, you need the py-notify module, which only seems to be available through <a href="http://pypi.python.org/">pip</a>. In order to install py-notify through pip, issue the following command in a terminal window:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">pip install py-notify
+</pre>
+</div>
+
+<p>
+If the command above fails (for example, because you don't have a C compiler installed &#x2013; something quite common on Windows and Mac OSX), you can use the pre-compiled binaries below:
+</p>
+
+<ul class="org-ul">
+<li>Linux (<a href="./py-notify/py-notify-linux-32bit-py2.7.zip">32 bits</a>, <a href="./py-notify/py-notify-linux-64bit-py2.7.zip">64 bits</a>)</li>
+<li>Windows (<a href="./py-notify/py-notify-win-32bit-py2.7.zip">32 bits</a>, <a href="./py-notify/py-notify-win-64bit-py2.7.zip">64 bits</a>)</li>
+<li>Mac OSX (<a href="./py-notify/py-notify-macosx-64bit-py2.7.zip">64 bits</a>)</li>
+</ul>
+
+<p>
+Download the appropriate file for your architecture and uncompress it in the same folder where the FlowAnalyzer.py script is located, or put it somewhere in your Python path.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgaea5e0d" class="outline-2">
+<h2 id="orgaea5e0d"><span class="section-number-2">3</span> Quick Start Guide</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-orgb904f72" class="outline-3">
+<h3 id="orgb904f72">Running FlowAnalyzer</h3>
+<div class="outline-text-3" id="text-orgb904f72">
+<p>
+Unzip the optical_flow.zip archive downloaded in the previous section, enter the created folder (optical_flow/python) and, from there, open a terminal window and do:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">python FlowAnalyzer.py
+</pre>
+</div>
+
+<p>
+This will bring up the interface shown in Figure 1.
+</p>
+
+
+<div class="figure">
+<p><img src="./figures/figure_1.png" alt="figure_1.png" width="90% Action!" align="center" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Initial window of the Optical Flow GUI.</p>
+</div>
+
+
+<p>
+Click on the button “Open File” to choose the video file to be analyzed. The first frame of the video will be shown in the interface (Figure 2). You can use the slider at the bottom of the window to browse the video.
+</p>
+
+<p>
+If you don't want to analyze the whole video file, you can use the “Initial Frame” and “Final Frame” spinboxes to define the segment of interest to be analyzed.
+</p>
+
+
+<div class="figure">
+<p><img src="./figures/figure_2.png" alt="figure_2.png" width="90% Action!" align="center" />
+</p>
+<p><span class="figure-number">Figure 5: </span>Optical Flow GUI after a video file has been loaded.</p>
+</div>
+
+<p>
+Click somewhere on the image frame and use the mouse to define a rectangle. When you release the mouse button, you will be presented with a dialog box where you can choose the region's name and type (interest or disinterest) (Figure 3). You can define as many regions as you want. The algorithm will compute one motion signal for each region of interest defined.
+</p>
+
+<p>
+Motion within regions of disinterest is completely ignored. This is useful when there are regions in the image frame whose motion we need to ignore (e.g., a running time stamp somewhere in the frame). It's interesting to note that by defining overlapping regions of interest and disinterest we can create what's effectively non-rectangular regions of interest (Figure 4).
+</p>
+
+<p>
+After defining all regions, click the button “Go” to run the analysis. Depending on the video's resolution and frame rate and on the number of frames to be processed, this may take a long time.
+</p>
+
+<p>
+Once the analysis is finished, a figure is plotted showing all the computed motion signals (Figure 5). There is one such signal per region of interest. This figure is exported to disk as a pdf file.
+</p>
+
+<p>
+The computed motion signals are saved to disk as an Excel spreadsheet and also as an HDF file (<a href="http://www.hdfgroup.org/">http://www.hdfgroup.org/</a>). The contents of both files are exactly the same.
+</p>
+
+<p>
+The HDF motion file can be loaded into Matlab by using the scripts available in the folder matlab. For instructions on how to load and plot the motion signals in Matlab, have a look at the script sample.m in that folder.
+</p>
+
+
+<div class="figure">
+<p><img src="./figures/figure_3.png" alt="figure_3.png" width="90% Action!" align="center" />
+</p>
+<p><span class="figure-number">Figure 6: </span>Defining a region of interest in the Optical Flow GUI.</p>
+</div>
+
+
+
+<div class="figure">
+<p><img src="./figures/figure_4.png" alt="figure_4.png" width="90% Action!" align="center" />
+</p>
+<p><span class="figure-number">Figure 7: </span>Regions of interest and disinterest.</p>
+</div>
+
+
+
+<div class="figure">
+<p><img src="./figures/figure_5.png" alt="figure_5.png" width="90% Action!" align="center" />
+</p>
+<p><span class="figure-number">Figure 8: </span>Motion signals computed from optical flow.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge01af9a" class="outline-2">
+<h2 id="orge01af9a"><span class="section-number-2">4</span> Auxiliary tools</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The FlowAnalyzer software defines an API and provides a set of tools for performing optical flow analysis on videos. The FlowAnalyzer GUI is the most commonly used of these tools and for many users it may be all they need. Nevertheless, there are some additional tools to help users with some specific tasks, as listed below:
+</p>
+
+<ul class="org-ul">
+<li><code>flow_analyzer.py</code> - this is a command line version of FlowAnalyzer.py. It allows you to perform optical flow analysis of a movie file without interacting with the GUI. This is useful when you need to process a movie non-interactively.</li>
+
+<li><code>batch_processing.py</code> - this script batch processes all the movie files in a given directory.</li>
+
+<li><code>create_flow_movie.py</code> - this script creates a flow movie from a flow field (hdf) file. In the future, this functionality will be incorporated into the FlowAnalyzer application so that extracting the motion signals and creating the flow movie can be done in parallel, in a single pass. This will make it unnecessary to create the intermediate flow field file (which can be quite big depending on the duration and resolution of the movie under analysis).</li>
+
+<li><code>read_flow_signals.py</code> - this script imports a motion signals file into Python</li>
+
+<li><code>read_flow_signals.m</code> - this script imports a motion signals file into Matlab</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Adriano Vilela Barbosa</p>
+<p class="date">Created: 2017-01-07 Sat 11:57</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
